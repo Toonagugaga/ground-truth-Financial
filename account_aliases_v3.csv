@@ -1,0 +1,157 @@
+concept,alias,note
+TOTAL_ASSETS,รวมสินทรัพย์,
+TOTAL_CURRENT_ASSETS,รวมสินทรัพย์หมุนเวียน,
+TOTAL_NONCURRENT_ASSETS,รวมสินทรัพย์ไม่หมุนเวียน,
+TOTAL_LIABILITIES,รวมหนี้สิน,
+TOTAL_CURRENT_LIAB,รวมหนี้สินหมุนเวียน,
+TOTAL_NONCURRENT_LIAB,รวมหนี้สินไม่หมุนเวียน,
+TOTAL_EQUITY,รวมส่วนของผู้ถือหุ้น,
+TOTAL_EQUITY,รวมส่วนของเจ้าของ,IIG ใช้แบบนี้
+TOTAL_EQUITY,รวมส่วนของผู้เป็นเจ้าของ,
+EQUITY_PARENT,ส่วนของผู้ถือหุ้นของบริษัทฯ,
+EQUITY_PARENT,รวมส่วนของผู้ถือหุ้นของบริษัท,
+EQUITY_PARENT,ส่วนของผู้ถือหุ้นของบริษัท,
+TOTAL_LIAB_EQUITY,รวมหนี้สินและส่วนของผู้ถือหุ้น,
+TOTAL_LIAB_EQUITY,รวมหนี้สินและส่วนของเจ้าของ,
+TOTAL_LIAB_EQUITY,รวมหนี้สินและส่วนของผู้เป็นเจ้าของ,
+CASH,เงินสดและรายการเทียบเท่าเงินสด,
+SHORT_TERM_INVEST,เงินลงทุนชั่วคราว,
+SHORT_TERM_INVEST,เงินลงทุนในสินทรัพย์ทางการเงินระยะสั้น,
+RESTRICTED_DEPOSITS,เงินฝากธนาคารที่มีข้อจำกัดการใช้,
+RESTRICTED_DEPOSITS,เงินฝากธนาคารที่มีภาระค้ำประกัน,
+RESTRICTED_DEPOSITS,เงินฝากสถาบันการเงินที่มีภาระผูกพัน,
+RESTRICTED_DEPOSITS_CURRENT,ส่วนของเงินฝากสถาบันการเงินที่มีภาระผูกพันที่ถึงกำหนดไถ่ถอนภายในหนึ่งปี,v3 BBIK ชื่อถูกตัดขึ้นบรรทัดใหม่
+RESTRICTED_DEPOSITS_CURRENT,เงินฝากสถาบันการเงินที่มีภาระผูกพันที่ถึงกำหนดไถ่ถอนภายในหนึ่งปี,v3
+TRADE_RECEIVABLES,ลูกหนี้การค้า,
+TRADE_RECEIVABLES,ลูกหนี้การค้าและลูกหนี้หมุนเวียนอื่น,
+TRADE_RECEIVABLES,ลูกหนี้การค้าและลูกหนี้อื่น,
+OTHER_RECEIVABLES,ลูกหนี้หมุนเวียนอื่น,
+UNBILLED_REVENUE,รายได้ที่ยังไม่เรียกชำระ,
+UNBILLED_REVENUE,รายได้ที่ยังไม่ได้เรียกชำระ,
+UNBILLED_RECEIVABLES,ลูกหนี้ตามสัญญาให้บริการที่ยังไม่ได้เรียกเก็บ,v3 IIG
+CONTRACT_ASSETS,สินทรัพย์ที่เกิดจากสัญญา,
+SHORT_TERM_LOANS_RELATED,เงินให้กู้ยืมระยะสั้นแก่บริษัทย่อย,
+SHORT_TERM_LOANS_RELATED,เงินให้กู้ยืมระยะสั้นแก่กิจการที่เกี่ยวข้องกัน,
+SHORT_TERM_LOANS_RELATED,เงินให้กู้ยืมระยะสั้นแก่บริษัทที่เกี่ยวข้องกัน,v3 IIG
+LONG_TERM_LOANS_RELATED,เงินให้กู้ยืมระยะยาวแก่กิจการที่เกี่ยวข้องกัน,v3 MFEC
+LONG_TERM_LOANS_RELATED,เงินให้กู้ยืมระยะยาวแก่บริษัทย่อย,v3
+INVENTORY,สินค้าคงเหลือ,
+INVENTORY,สินค้าและพัสดุคงเหลือ,PTT OR
+WIP,งานบริการระหว่างทำ,BBIK
+WIP,ต้นทุนงานระหว่างทำ,MFEC
+PREPAID_SERVICE_COST,ต้นทุนบริการและค่าใช้จ่ายอื่นจ่ายล่วงหน้า,GABLE
+PREPAID_SERVICE_COST,ต้นทุนงานบริการจ่ายล่วงหน้า,MFEC
+PREPAID_LICENSE,ค่าสิทธิจากการให้ใช้ใบอนุญาตการใช้โปรแกรมคอมพิวเตอร์จ่ายล่วงหน้า,v3 IIG ชื่อถูกตัดขึ้นบรรทัดใหม่
+CONTRACT_ACQUISITION_COST,ต้นทุนในการได้มาซึ่งสัญญาที่ทำกับลูกค้า,
+CURRENT_TAX_ASSETS,สินทรัพย์ภาษีเงินได้ของงวดปัจจุบัน,
+CURRENT_TAX_ASSETS,สินทรัพย์ภาษีเงินได้ของงวดก่อน,
+WHT_ASSETS,ภาษีเงินได้หัก ณ ที่จ่าย,
+DERIVATIVE_ASSETS_CURRENT,สินทรัพย์ตราสารอนุพันธ์หมุนเวียน,v3 MFEC
+OTHER_CURRENT_FIN_ASSETS,สินทรัพย์ทางการเงินหมุนเวียนอื่น,
+OTHER_CURRENT_ASSETS,สินทรัพย์หมุนเวียนอื่น,
+INVEST_SUBSIDIARY,เงินลงทุนในบริษัทย่อย,
+INVEST_ASSOCIATE,เงินลงทุนในบริษัทร่วม,
+INVEST_ASSOCIATE,เงินลงทุนในบริษัทร่วมและการร่วมค้า,
+INVEST_JV,เงินลงทุนในการร่วมค้า,
+OTHER_NONCURRENT_FIN_ASSETS,สินทรัพย์ทางการเงินไม่หมุนเวียนอื่น,
+PPE,ที่ดิน อาคารและอุปกรณ์,
+PPE,อุปกรณ์,GABLE
+PPE,ส่วนปรับปรุงอาคารและอุปกรณ์,MFEC
+PPE,ส่วนปรับปรุงอาคารเช่าและอุปกรณ์,BBIK
+RIGHT_OF_USE,สินทรัพย์สิทธิการใช้,
+GOODWILL,ค่าความนิยม,
+INTANGIBLES,สินทรัพย์ไม่มีตัวตน,
+INTANGIBLES,สินทรัพย์ไม่มีตัวตนอื่น,
+INTANGIBLES,สินทรัพย์ไม่มีตัวตนอื่นนอกจากค่าความนิยม,
+DEFERRED_TAX_ASSETS,สินทรัพย์ภาษีเงินได้รอการตัดบัญชี,
+DEFERRED_TAX_ASSETS,สินทรัพย์ภาษีเงินได้รอตัดบัญชี,BBIK สะกดสั้นกว่า
+OTHER_NONCURRENT_ASSETS,สินทรัพย์ไม่หมุนเวียนอื่น,
+BANK_OVERDRAFT,เงินเบิกเกินบัญชีจากสถาบันการเงิน,
+SHORT_TERM_BORROWINGS,เงินกู้ยืมระยะสั้นจากสถาบันการเงิน,
+CURRENT_PORTION_LT_BORROWINGS,เงินกู้ยืมระยะยาวจากสถาบันการเงินที่ถึงกำหนดชำระภายในหนึ่งปี,v3 IIG ชื่อถูกตัดขึ้นบรรทัดใหม่
+CURRENT_PORTION_LT_BORROWINGS,ส่วนของเงินกู้ยืมระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี,v3
+TRADE_PAYABLES,เจ้าหนี้การค้า,
+TRADE_PAYABLES,เจ้าหนี้การค้าและเจ้าหนี้หมุนเวียนอื่น,
+TRADE_PAYABLES,เจ้าหนี้การค้าและเจ้าหนี้อื่น,
+OTHER_PAYABLES,เจ้าหนี้อื่น,
+OTHER_PAYABLES,เจ้าหนี้หมุนเวียนอื่น,
+CONTRACT_LIABILITIES,หนี้สินที่เกิดจากสัญญา,
+DEFERRED_REVENUE,รายได้รับล่วงหน้า,
+DEFERRED_REVENUE_CURRENT,รายได้รับล่วงหน้าส่วนที่จะรับรู้เป็นรายได้ภายในหนึ่งปี,v3 IIG ชื่อถูกตัดขึ้นบรรทัดใหม่
+ACCRUED_EXPENSES,ค่าใช้จ่ายค้างจ่าย,
+INCOME_TAX_PAYABLE,ภาษีเงินได้นิติบุคคลค้างจ่าย,
+INCOME_TAX_PAYABLE,ภาษีเงินได้ค้างจ่าย,
+WARRANTY_PROVISION,ประมาณการรับประกันคุณภาพงาน,
+LITIGATION_PROVISION,ประมาณการหนี้สินค่าเสียหายจากการฟ้องร้อง,v3 MFEC ชื่อถูกตัดขึ้นบรรทัดใหม่
+OTHER_CURRENT_LIAB,หนี้สินหมุนเวียนอื่น,
+OTHER_CURRENT_FIN_LIAB,หนี้สินทางการเงินหมุนเวียนอื่น,
+LEASE_LIABILITIES,หนี้สินตามสัญญาเช่า,
+CURRENT_LEASE_LIABILITIES,ส่วนของหนี้สินตามสัญญาเช่าที่ถึงกำหนดชำระภายในหนึ่งปี,v3 MFEC/GABLE ชื่อถูกตัดขึ้นบรรทัดใหม่
+CURRENT_LEASE_LIABILITIES,หนี้สินตามสัญญาเช่าที่ถึงกำหนดชำระภายในหนึ่งปี,v3 IIG
+EMPLOYEE_BENEFIT_PROVISION,ประมาณการหนี้สินสำหรับผลประโยชน์พนักงาน,
+EMPLOYEE_BENEFIT_PROVISION,ประมาณการหนี้สินไม่หมุนเวียนสำหรับผลประโยชน์พนักงาน,
+DECOMMISSIONING_PROVISION,ประมาณการหนี้สินจากการรื้อถอน,
+DECOMMISSIONING_PROVISION,ประมาณการต้นทุนการรื้อถอน,
+OTHER_NONCURRENT_LIAB,หนี้สินไม่หมุนเวียนอื่น,
+SHARE_CAPITAL,ทุนออกจำหน่ายและชำระเต็มมูลค่าแล้ว,
+SHARE_CAPITAL,ทุนที่ออกและชำระแล้ว,
+SHARE_CAPITAL,ทุนออกจำหน่ายและชำระแล้ว,
+SHARE_CAPITAL_DESC,หุ้นสามัญ 441453555 หุ้น มูลค่าหุ้นละ 1 บาท,v3 MFEC/GABLE ตัวเลขในชื่อถูกตัดโดย skeleton อยู่แล้ว
+SHARE_CAPITAL_DESC,หุ้นสามัญจำนวน 123376607 หุ้น มูลค่าตราไว้หุ้นละ 0.50 บาท,v3 IIG
+REGISTERED_CAPITAL,ทุนจดทะเบียน,
+SHARE_PREMIUM,ส่วนเกินมูลค่าหุ้นสามัญ,
+SHARE_PREMIUM,ส่วนเกินมูลค่าหุ้น,
+SHARE_SWAP_SURPLUS,ส่วนเกินทุนจากการแลกหุ้น,BBIK
+OWNERSHIP_CHANGE_RESERVE,ส่วนต่ำจากการเปลี่ยนแปลงสัดส่วนการลงทุนในบริษัทย่อย,v3 BBIK
+OWNERSHIP_CHANGE_RESERVE,ส่วนเกินจากการเปลี่ยนแปลงสัดส่วนการลงทุนในบริษัทย่อย,v3
+BUSINESS_COMBINATION_SURPLUS,ส่วนเกินจากการรวมธุรกิจภายใต้การควบคุมเดียวกัน,
+BUSINESS_COMBINATION_SURPLUS,ส่วนต่ำกว่าทุนจากการรวมธุรกิจภายใต้การควบคุมเดียวกัน,
+SHARE_BASED_PAYMENT_RESERVE,สำรองส่วนทุนจากการจ่ายโดยใช้หุ้นเป็นเกณฑ์,
+SHARE_BASED_PAYMENT_RESERVE,ส่วนเกินทุนจากการจ่ายโดยใช้หุ้นเป็นเกณฑ์,
+LEGAL_RESERVE,สำรองตามกฎหมาย,
+LEGAL_RESERVE,ทุนสำรองตามกฎหมาย,
+LEGAL_RESERVE,จัดสรรแล้ว - สำรองตามกฎหมาย,
+TREASURY_STOCK,หุ้นทุนซื้อคืน,
+RETAINED_EARNINGS,ยังไม่ได้จัดสรร,
+RETAINED_EARNINGS,กำไรสะสมยังไม่ได้จัดสรร,
+OTHER_EQUITY_COMPONENTS,องค์ประกอบอื่นของส่วนของผู้ถือหุ้น,
+OTHER_EQUITY_COMPONENTS,องค์ประกอบอื่นของส่วนของเจ้าของ,
+NCI,ส่วนของผู้มีส่วนได้เสียที่ไม่มีอำนาจควบคุมของบริษัทย่อย,
+NCI,ส่วนได้เสียที่ไม่มีอำนาจควบคุม,
+REVENUE,รายได้จากการขายและให้บริการ,
+REVENUE,รายได้จากการขายสินค้าและการให้บริการ,
+REVENUE,รายได้จากการขายและการให้บริการ,
+REVENUE_SERVICE,รายได้จากการให้บริการ,BBIK แยกเฉพาะบริการ
+TOTAL_REVENUE,รวมรายได้,
+COGS,ต้นทุนขายและให้บริการ,
+COGS,ต้นทุนขายสินค้าและต้นทุนการให้บริการ,
+COGS_SERVICE,ต้นทุนการให้บริการ,
+GROSS_PROFIT,กำไรขั้นต้น,
+SELLING_EXPENSES,ค่าใช้จ่ายในการขาย,
+SELLING_EXPENSES,ค่าใช้จ่ายในการขายและจัดจำหน่าย,
+ADMIN_EXPENSES,ค่าใช้จ่ายในการบริหาร,
+TOTAL_EXPENSES,รวมค่าใช้จ่าย,
+OTHER_INCOME,รายได้อื่น,
+DIVIDEND_INCOME,รายได้เงินปันผล,
+DIVIDEND_INCOME,เงินปันผลรับ,
+FX_GAIN,กำไรจากอัตราแลกเปลี่ยน,
+FINANCE_INCOME,รายได้ทางการเงิน,
+FINANCE_INCOME,รายได้ดอกเบี้ย,
+FINANCE_COST,ต้นทุนทางการเงิน,
+SHARE_OF_PROFIT_ASSOCIATE,ส่วนแบ่งกำไรของบริษัทร่วมและการร่วมค้าที่ใช้วิธีส่วนได้เสีย,
+SHARE_OF_PROFIT_ASSOCIATE,ส่วนแบ่งกำไร (ขาดทุน) จากเงินลงทุนในบริษัทร่วม,
+OPERATING_PROFIT,กำไรจากกิจกรรมดำเนินงาน,
+OPERATING_PROFIT,กำไร (ขาดทุน) จากการดำเนินงาน,
+PROFIT_BEFORE_TAX,กำไรก่อนภาษีเงินได้,
+PROFIT_BEFORE_TAX,กำไร (ขาดทุน) ก่อนค่าใช้จ่ายภาษีเงินได้,
+INCOME_TAX_EXPENSE,ค่าใช้จ่ายภาษีเงินได้,
+NET_PROFIT,กำไรสำหรับงวด,
+NET_PROFIT,กำไร (ขาดทุน) สำหรับงวด,
+NET_PROFIT,กำไรสุทธิ,
+OCI_TOTAL,กำไร (ขาดทุน) เบ็ดเสร็จอื่นสำหรับงวด,
+OCI_TOTAL,กำไรขาดทุนเบ็ดเสร็จอื่นสำหรับงวด,
+TOTAL_COMPREHENSIVE_INCOME,กำไรเบ็ดเสร็จรวมสำหรับงวด,
+TOTAL_COMPREHENSIVE_INCOME,กำไรขาดทุนเบ็ดเสร็จรวมสำหรับงวด,
+FX_TRANSLATION,ผลต่างของอัตราแลกเปลี่ยนจากการแปลงค่างบการเงิน,
+EPS,กำไรต่อหุ้นขั้นพื้นฐาน,
+EPS,กำไร (ขาดทุน) ต่อหุ้นขั้นพื้นฐาน,

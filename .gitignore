@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ไฟล์ PDF ต้นทาง — เป็นเอกสารของบริษัทอื่น ไม่ควรอัปขึ้น repo สาธารณะ
+# ผู้ใช้ดาวน์โหลดเองได้จาก set.or.th หรือเว็บนักลงทุนสัมพันธ์ของแต่ละบริษัท
+*.pdf
+
+# ผลลัพธ์ที่สร้างใหม่ได้จากการรันโค้ด ไม่ต้องเก็บในประวัติ
+# ยกเว้น all.csv ที่ตั้งใจเก็บไว้ให้คนดูผลได้โดยไม่ต้องรันเอง (ดู .gitignore ล่างสุด)
+extracted.csv
+eval_report.csv
+eval_bs2_report.csv
+eval_cf_report.csv
+eval_is_report.csv
+ocr_out/
+*_ocr/
+*.layout.txt
+
+# ผลลัพธ์ชั่วคราวของ run_all.py — สร้างใหม่ทุกครั้งที่รัน
+_run_*.csv
+
+# ฉบับร่างของ ground truth ระหว่างทาง ตัวจริงคือ tech-01..14 ที่ไม่มีคำต่อท้ายพวกนี้
+# ถ้าปล่อยไว้ใน repo คนอ่านจะไม่รู้ว่าไฟล์ไหนคือตัวที่ใช้จริง
+tech-02_template.csv
+tech-02_template_v2.csv
+tech-02_ต้องแก้.csv
+tech-02_PTT_เลื่อนแถว.csv
+tech-03_is_template.csv
+tech-03_เพิ่มแถวตรวจสมการ.csv
+tech-04_cf_template.csv
+
+# ไฟล์ทดลองระหว่างทาง ไม่ได้ใช้ในผลลัพธ์สุดท้าย
+ex1.csv
+is4.csv
+is_all.csv
+new_bs.csv
+bsx.csv
+b.csv
+g8.csv
+i.csv
+cfy.csv
+ALL/
+
+# เก็บ all.csv กับ se_m.csv ไว้ (คนอ่าน repo จะได้เห็นผลลัพธ์โดยไม่ต้องรัน)
+!all.csv
+!se_m.csv

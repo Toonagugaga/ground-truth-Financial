@@ -1,0 +1,80 @@
+﻿company,unit,page,item,con_cur,con_prev,sep_cur,sep_prev,trap,_concept_hint,_note,section
+BBIK,baht,6,รายได้จากการให้บริการ,370571059.0,346661884.0,166356212.0,198784615.0,long_num,REVENUE_SERVICE,nan,
+BBIK,baht,6,ต้นทุนการให้บริการ,-172660897.0,-167851902.0,-111207480.0,-119606113.0,parentheses,COGS_SERVICE,nan,
+BBIK,baht,6,กำไรขั้นต้น,197910162.0,178809982.0,55148732.0,79178502.0,long_num,GROSS_PROFIT,nan,
+BBIK,baht,6,กำไรจากอัตราแลกเปลี่ยน,1641851.0,,1886427.0,,dash_empty,FX_GAIN,nan,
+BBIK,baht,6,รายได้อื่น,402974.0,757130.0,314844.0,391313.0,normal,OTHER_INCOME,nan,
+BBIK,baht,6,ค่าใช้จ่ายในการขาย,-31919122.0,-35731445.0,-16709894.0,-18787442.0,parentheses,SELLING_EXPENSES,nan,
+BBIK,baht,6,ค่าใช้จ่ายในการบริหาร,-90610376.0,-77452068.0,-32950083.0,-25702088.0,parentheses,ADMIN_EXPENSES,nan,
+BBIK,baht,6,กำไรจากกิจกรรมดำเนินงาน,77717661.0,68171144.0,32518866.0,83613984.0,normal,OPERATING_PROFIT,nan,
+BBIK,baht,6,รายได้ทางการเงิน,843387.0,728272.0,766216.0,615448.0,normal,FINANCE_INCOME,nan,
+BBIK,baht,6,ต้นทุนทางการเงิน,-1629812.0,-1755700.0,-788445.0,-843155.0,parentheses,FINANCE_COST,nan,
+BBIK,baht,6,ส่วนแบ่งกำไรของบริษัทร่วมและการร่วมค้าที่ใช้วิธีส่วนได้เสีย,7050420.0,9356055.0,,,long_name,SHARE_OF_PROFIT_ASSOCIATE,nan,
+BBIK,baht,6,กำไรก่อนภาษีเงินได้,83981656.0,76499771.0,32496637.0,83386277.0,normal,PROFIT_BEFORE_TAX,nan,
+BBIK,baht,6,รวมรายการที่อาจถูกจัดประเภทใหม่ไว้ในกำไรหรือขาดทุนในภายหลัง,-165896.0,39596.0,,,subtotal,OCI_RECLASSIFIABLE_TOTAL,nan,
+BBIK,baht,6,รวมรายการที่จะไม่ถูกจัดประเภทใหม่ไว้ในกำไรหรือขาดทุนในภายหลัง,1000293.0,-801368.0,574749.0,-801368.0,subtotal,OCI_NON_RECLASSIFIABLE_TOTAL,nan,
+BBIK,baht,6,เงินปันผลรับ 4 และ 5.3,,1474321.0,,36474321.0,dash_empty,DIVIDEND_INCOME,(?) ตรวจการสะกดจาก PDF,
+BBIK,baht,6,ก ําไรจากการประมาณการตามหลักคณิตศาสตร์ประก ันภัย - สุทธิจากภาษี,425544.0,,,,long_name,ACTUARIAL_GAIN,(?) ตรวจการสะกดจาก PDF,
+BBIK,baht,7,กำไร (บาทต่อหุ้น),0.4,0.36,0.15,0.4,decimal,EPS,nan,
+BBIK,baht,7,จำนวนหุ้นสามัญถัวเฉลี่ยถ่วงน้ำหนัก (หุ้น),200015474.0,200015474.0,200015474.0,200015474.0,long_name,WEIGHTED_AVG_SHARES,nan,
+GABLE,thousand,6,รายได้จากการขายและให้บริการ,1504451.0,1381212.0,1248724.0,1122024.0,normal,REVENUE,nan,
+GABLE,thousand,6,ต้นทุนขายและให้บริการ,-1214198.0,-1147399.0,-1024146.0,-941316.0,parentheses,COGS,nan,
+GABLE,thousand,6,กำไรขั้นต้น,290253.0,233813.0,224578.0,180708.0,normal,GROSS_PROFIT,nan,
+GABLE,thousand,6,รายได้เงินปันผล,,,120000.0,,dash_empty,DIVIDEND_INCOME,nan,
+GABLE,thousand,6,รายได้ค่าบริหารจัดการ,,,3721.0,3471.0,dash_empty,MANAGEMENT_FEE_INCOME,nan,
+GABLE,thousand,6,รายได้อื่น,15235.0,5067.0,9852.0,3708.0,normal,OTHER_INCOME,nan,
+GABLE,thousand,6,กำไรก่อนค่าใช้จ่าย,305488.0,238880.0,358151.0,187887.0,normal,PROFIT_BEFORE_EXPENSES,nan,
+GABLE,thousand,6,ค่าใช้จ่ายในการขายและจัดจำหน่าย,-97528.0,-95168.0,-80806.0,-80963.0,parentheses,SELLING_EXPENSES,nan,
+GABLE,thousand,6,ค่าใช้จ่ายในการบริหาร,-103209.0,-143264.0,-79426.0,-121493.0,parentheses,ADMIN_EXPENSES,nan,
+GABLE,thousand,6,ค่าใช้จ่ายอื่น,-302.0,,-457.0,-709.0,parentheses,OTHER_EXPENSES,nan,
+GABLE,thousand,6,รวมค่าใช้จ่าย,-201039.0,-238432.0,-160689.0,-203165.0,subtotal,TOTAL_EXPENSES,nan,
+GABLE,thousand,6,รายได้ทางการเงิน,43.0,25.0,194.0,257.0,small_num,FINANCE_INCOME,nan,
+GABLE,thousand,6,กำไร (ขาดทุน) ต่อหุ้นขั้นพื้นฐาน กำไร (ขาดทุน) ส่วนที่เป็นของผู้ถือหุ้นของบริษัทฯ,0.12,-0.01,0.26,-0.03,decimal,EPS,nan,
+IIG,unknown,4,รายได้จากการให้บริการ,72213848.0,120763962.0,18071039.0,23613470.0,long_num,REVENUE_SERVICE,nan,
+IIG,unknown,4,เงินปันผลรับจากบริษัทย่อย,,,,7200000.0,dash_empty,DIVIDEND_INCOME,nan,
+IIG,unknown,4,รายได้อื่น,2000647.0,4473382.0,4210144.0,3992026.0,normal,OTHER_INCOME,nan,
+IIG,unknown,4,รวมรายได้,160328576.0,230196444.0,69756188.0,101372444.0,subtotal,TOTAL_REVENUE,nan,
+IIG,unknown,4,ต้นทุนจากการให้ใช้ใบอนุญาตการใช้โปรแกรมคอมพิวเตอร์,67861078.0,85191664.0,39477165.0,55077575.0,long_name,COGS_LICENSE,nan,
+IIG,unknown,4,ค่าใช้จ่ายในการขาย,10023699.0,16088836.0,4676561.0,6774495.0,normal,SELLING_EXPENSES,nan,
+IIG,unknown,4,ค่าใช้จ่ายในการบริหาร,29044993.0,43934197.0,19680444.0,25544764.0,normal,ADMIN_EXPENSES,nan,
+IIG,unknown,4,ผลขาดทุนด้านเครดิตที่คาดว่าจะเกิดขึ้น,1132501.0,,1132501.0,,long_name,ECL,nan,
+IIG,unknown,4,ขาดทุนจากการด้อยค่าของเงินลงทุนในบริษัทร่วม,,,,44003273.0,long_name,IMPAIRMENT_ASSOCIATE,nan,
+IIG,unknown,4,ขาดทุนสุทธิจากการสูญเสียการควบคุมในบริษัทย่อย,,69360106.0,,,long_name,LOSS_ON_DECONSOLIDATION,nan,
+IIG,unknown,4,รวมค่าใช้จ่าย,172273221.0,321280746.0,76972932.0,158983956.0,subtotal,TOTAL_EXPENSES,nan,
+IIG,unknown,4,ขาดทุนก่อนต้นทุนทางการเงินและภาษีเงินได้,-11944645.0,-91084302.0,-7216744.0,-57611512.0,parentheses,PROFIT_BEFORE_FINANCE_TAX,nan,
+IIG,unknown,4,ต้นทุนทางการเงิน,-5994786.0,-7712911.0,-4825784.0,-6636392.0,parentheses,FINANCE_COST,nan,
+IIG,unknown,4,ขาดทุนก่อนภาษีเงินได้,-17939431.0,-98797213.0,-12042528.0,-64247904.0,parentheses,PROFIT_BEFORE_TAX,nan,
+IIG,unknown,4,ผลประโยชน์ (ค่าใช้จ่าย) ภาษีเงินได้,785568.0,-423271.0,593149.0,144996.0,parentheses,INCOME_TAX_EXPENSE,nan,
+IIG,unknown,4,โปรแกรมคอมพิวเตอร์,80151119.0,103371660.0,47475005.0,66566948.0,long_num,REVENUE_LICENSE,(?) ตรวจการสะกดจาก PDF,
+IIG,unknown,4,ต้นทุนจากการให้บริการ,61215723.0,103322164.0,12006261.0,27583849.0,long_num,COGS_SERVICE,(?) ตรวจการสะกดจาก PDF,
+IIG,unknown,5,ขาดทุน (บาทต่อหุ้น),-0.13,-0.83,-0.09,-0.53,decimal,EPS,nan,
+MFEC,thousand,4,รายได้เงินปันผล,,,5750.0,,dash_empty,DIVIDEND_INCOME,nan,
+MFEC,thousand,4,รายได้อื่น,11556.0,22742.0,12028.0,21142.0,normal,OTHER_INCOME,nan,
+MFEC,thousand,4,รวมรายได้,1657768.0,1589942.0,1501512.0,1466210.0,subtotal,TOTAL_REVENUE,nan,
+MFEC,thousand,4,ค่าใช้จ่ายในการขายและจัดจำหน่าย,48145.0,41707.0,36798.0,36138.0,normal,SELLING_EXPENSES,nan,
+MFEC,thousand,4,ค่าใช้จ่ายในการบริหาร,165407.0,155591.0,138713.0,130953.0,normal,ADMIN_EXPENSES,nan,
+MFEC,thousand,4,ค่าใช้จ่ายอื่น,2097.0,1635.0,3520.0,1570.0,normal,OTHER_EXPENSES,nan,
+MFEC,thousand,4,รวมค่าใช้จ่าย,1561372.0,1499992.0,1415205.0,1355068.0,subtotal,TOTAL_EXPENSES,nan,
+MFEC,thousand,4,ต้นทุนทางการเงิน,-2457.0,-4638.0,-2231.0,-4293.0,parentheses,FINANCE_COST,nan,
+MFEC,thousand,4,ค่าใช้จ่ายภาษีเงินได้,-19991.0,-24475.0,-16427.0,-21752.0,parentheses,INCOME_TAX_EXPENSE,nan,
+MFEC,thousand,4,กำไร (ขาดทุน) เบ็ดเสร็จอื่นสำหรับงวด,21960.0,-7931.0,21960.0,-7931.0,parentheses,OCI_TOTAL,nan,
+MFEC,thousand,4,กาไรจากการขายเงินลงทุนในบริ ษทั ร่ วม,,3267.0,,37168.0,long_name,GAIN_ON_SALE_INVESTMENT,(?) ตรวจการสะกดจาก PDF,
+MFEC,thousand,4,ผลขาดทุน (กาไร) จากการวัดมูลค่ายุติธรรมของตราสารอนุพนั ธ์,-21793.0,2409.0,-21793.0,2409.0,parentheses,FV_LOSS_DERIVATIVES,(?) ตรวจการสะกดจาก PDF,
+MFEC,thousand,4,กำไรสำหรับงวด,75567.0,60662.0,68493.0,86475.0,subtotal,NET_PROFIT,MFEC งบกำไรขาดทุนเบ็ดเสร็จ (พันบาท),กำไรขาดทุน
+MFEC,thousand,4,กำไรขาดทุนเบ็ดเสร็จรวมสำหรับงวด,97527.0,52731.0,90453.0,78544.0,subtotal,TOTAL_COMPREHENSIVE_INCOME,"MFEC = กำไรสำหรับงวด + OCI 21,960/(7,931)",กำไรขาดทุนเบ็ดเสร็จรวม
+GABLE,thousand,6,กำไร (ขาดทุน) สำหรับงวด,82787.0,-7347.0,181727.0,-19294.0,subtotal,NET_PROFIT,GABLE งบกำไรขาดทุนเบ็ดเสร็จ (พันบาท),กำไรขาดทุน
+GABLE,thousand,6,กำไรขาดทุนเบ็ดเสร็จอื่นสำหรับงวด,118.0,-5.0,,,subtotal,OCI_TOTAL,GABLE ผลต่างอัตราแลกเปลี่ยนจากการแปลงค่างบการเงิน,กำไรขาดทุนเบ็ดเสร็จอื่น
+GABLE,thousand,6,กำไรขาดทุนเบ็ดเสร็จรวมสำหรับงวด,82905.0,-7352.0,181727.0,-19294.0,subtotal,TOTAL_COMPREHENSIVE_INCOME,GABLE = แถว 4 + แถว 5,กำไรขาดทุนเบ็ดเสร็จรวม
+GABLE,thousand,6,ส่วนที่เป็นของผู้ถือหุ้นของบริษัทฯ,83951.0,-8183.0,181727.0,-19294.0,same_name,PROFIT_ATTRIB_PARENT,GABLE การแบ่งปันกำไร,การแบ่งปันกำไร (ขาดทุน)
+GABLE,thousand,6,ส่วนที่เป็นของผู้มีส่วนได้เสียที่ไม่มีอำนาจควบคุมของบริษัทย่อย,-1164.0,836.0,,,same_name,PROFIT_ATTRIB_NCI,GABLE งบเฉพาะกิจการไม่มี NCI,การแบ่งปันกำไร (ขาดทุน)
+GABLE,thousand,6,ส่วนที่เป็นของผู้ถือหุ้นของบริษัทฯ,84069.0,-8188.0,181727.0,-19294.0,same_name,TCI_ATTRIB_PARENT,GABLE การแบ่งปันกำไรเบ็ดเสร็จรวม,การแบ่งปันกำไรขาดทุนเบ็ดเสร็จรวม
+GABLE,thousand,6,ส่วนที่เป็นของผู้มีส่วนได้เสียที่ไม่มีอำนาจควบคุมของบริษัทย่อย,-1164.0,836.0,,,same_name,TCI_ATTRIB_NCI,GABLE งบเฉพาะกิจการไม่มี NCI,การแบ่งปันกำไรขาดทุนเบ็ดเสร็จรวม
+BBIK,baht,4,กำไรสำหรับงวด,80062716.0,72767364.0,29383462.0,79093599.0,subtotal,NET_PROFIT,BBIK งบกำไรขาดทุนเบ็ดเสร็จ (บาท),กำไรขาดทุน
+BBIK,baht,4,กำไร (ขาดทุน) เบ็ดเสร็จอื่นสำหรับงวด - สุทธิจากภาษี,834397.0,-761772.0,574749.0,-801368.0,subtotal,OCI_TOTAL,BBIK OCI สุทธิจากภาษี,กำไร (ขาดทุน) เบ็ดเสร็จอื่น
+BBIK,baht,4,กำไรเบ็ดเสร็จรวมสำหรับงวด,80897113.0,72005592.0,29958211.0,78292231.0,subtotal,TOTAL_COMPREHENSIVE_INCOME,BBIK = แถว 11 + แถว 12,กำไรเบ็ดเสร็จรวม
+IIG,baht,5,ส่วนของผู้เป็นเจ้าของของบริษัท,-15450954.0,-100044392.0,-11449379.0,-64102908.0,same_name,TCI_ATTRIB_PARENT,IIG การแบ่งปันเบ็ดเสร็จรวม (บาท),การแบ่งปันกำไร (ขาดทุน) เบ็ดเสร็จรวม
+IIG,baht,5,ส่วนของผู้เป็นเจ้าของของบริษัท,-15450954.0,-100044392.0,-11449379.0,-64102908.0,same_name,PROFIT_ATTRIB_PARENT,IIG การแบ่งปันขาดทุน (บาท),การแบ่งปันกำไร (ขาดทุน)
+IIG,baht,4,ขาดทุนเบ็ดเสร็จรวมสำหรับงวด,-17153863.0,-99220484.0,-11449379.0,-64102908.0,subtotal,TOTAL_COMPREHENSIVE_INCOME,IIG ไม่มี OCI → เท่ากับขาดทุนสุทธิ,ขาดทุนเบ็ดเสร็จรวม
+IIG,baht,4,ขาดทุนสำหรับงวด,-17153863.0,-99220484.0,-11449379.0,-64102908.0,subtotal,NET_PROFIT,IIG งบกำไรขาดทุนเบ็ดเสร็จ (บาท),กำไรขาดทุน
+IIG,baht,5,ส่วนได้เสียที่ไม่มีอำนาจควบคุม,-1702909.0,823908.0,,,same_name,PROFIT_ATTRIB_NCI,IIG งบเฉพาะกิจการไม่มี NCI (PDF แสดง -),การแบ่งปันกำไร (ขาดทุน)
+IIG,baht,5,ส่วนได้เสียที่ไม่มีอำนาจควบคุม,-1702909.0,823908.0,,,same_name,TCI_ATTRIB_NCI,IIG งบเฉพาะกิจการไม่มี NCI (PDF แสดง -),การแบ่งปันกำไร (ขาดทุน) เบ็ดเสร็จรวม
