@@ -44,6 +44,8 @@ g8.csv
 i.csv
 cfy.csv
 ALL/
+KAGGLE_OCR.md
+README_CODE.md
 
 # เก็บ all.csv กับ se_m.csv ไว้ (คนอ่าน repo จะได้เห็นผลลัพธ์โดยไม่ต้องรัน)
 !all.csv
