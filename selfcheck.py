@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import sys
 from collections import defaultdict
+from pathlib import Path
 
 import pandas as pd
 
@@ -64,6 +65,153 @@ def test_text():
     check("strip_suffix ห้ามตัด - ไม่หมุนเวียน",
           core.strip_suffix("รายได้รับล่วงหน้า - ไม่หมุนเวียน"),
           "รายได้รับล่วงหน้า - ไม่หมุนเวียน")
+    # ชื่อบริษัทที่มีช่องว่างหัวท้ายต้องไม่ทำให้ตัวตรวจสมการบอดเงียบๆ
+    #
+    # pick_rows ทำ .strip() ให้ชื่อบริษัทตอนสร้างตารางค้นหา แต่ผู้เรียก
+    # check_equations ส่งชื่อดิบเข้ามา คีย์จึงไม่ตรงกันสักตัว ผลคือ
+    #   ผ่าน 0 | ผิด 0 | ข้าม 32
+    # ซึ่งหน้าตาเหมือน "ตรวจแล้วไม่เจอปัญหา" ทั้งที่แปลว่า "ตรวจไม่ได้เลย"
+    #
+    # เจอจากไฟล์ชื่อ "FINANCIAL_STATEMENTS_SRS .pdf" (มีช่องว่างก่อนนามสกุล)
+    # ซึ่งชื่อบริษัทถูกเดาจากชื่อไฟล์ -> ติดช่องว่างมาด้วย
+    _row = {"company": "  ACME ", "concept": "TOTAL_ASSETS",
+            "concept_eq": "TOTAL_ASSETS", "statement": "BS", "item": "x",
+            "match_score": 1.0, "con_cur": 3.0, "con_prev": None,
+            "sep_cur": None, "sep_prev": None}
+    _rows = [dict(_row),
+             dict(_row, concept="TOTAL_CURRENT_ASSETS",
+                  concept_eq="TOTAL_CURRENT_ASSETS", con_cur=1.0),
+             dict(_row, concept="TOTAL_NONCURRENT_ASSETS",
+                  concept_eq="TOTAL_NONCURRENT_ASSETS", con_cur=2.0)]
+    _lut, _ = core.build_equation_lut(pd.DataFrame(_rows))
+    _ok, _bad, _skip, _ = core.check_equations(
+        _lut, ["  ACME "], core.EQUATIONS_BS, verbose=False)
+    check("ชื่อบริษัทมีช่องว่างหัวท้ายแล้วสมการยังรันได้", _ok > 0, True)
+    check("ชื่อบริษัทมีช่องว่างหัวท้ายแล้วสมการไม่ผิด", _bad, 0)
+
+    # ต้องบอกได้ว่าเครื่องนี้ขาดโปรแกรมอะไร ก่อนจะไปโทษว่าไฟล์เป็น PDF สแกน
+    #
+    # บั๊กจริง: รัน dashboard บน Windows ที่ไม่ได้ติดตั้ง poppler
+    # subprocess โยน FileNotFoundError [WinError 2] ออกมา แล้วหน้าจอสรุปว่า
+    # "อ่านไม่ได้เลยสักบรรทัด อาจเป็น PDF สแกน" ทั้งที่ไฟล์นั้นมี text layer ปกติ
+    # คือวินิจฉัยผิดสาเหตุ แล้วชี้ให้ผู้ใช้ไปแก้ผิดจุด
+    check("missing_poppler คืน list", isinstance(core.missing_poppler(), list), True)
+    check("เครื่องนี้มี poppler ครบ", core.missing_poppler(), [])
+
+    # page_text / n_pages ต้องคืนชนิดข้อมูลที่สัญญาไว้เสมอ ไม่ว่า subprocess
+    # จะทำอะไรก็ตาม
+    #
+    # บั๊กจริงบน Windows: subprocess.run(...).stdout คืน None ทำให้
+    # "".join(...) ระเบิดเป็น TypeError กลางหน้าจอผู้ใช้ แทนที่จะได้ข้อความ
+    # บอกว่าอ่านไฟล์ไม่ได้ ซึ่งเป็นสิ่งที่ระบบควรบอก
+    # บน Linux stdout เป็น "" อยู่แล้ว เทสต์ที่เรียกเฉยๆ จึงผ่านโดยไม่ได้ทดสอบอะไร
+    # ต้องจำลองสภาพของ Windows ให้ subprocess คืน stdout=None ตรงๆ
+    # ไม่งั้นเป็นเทสต์ที่ให้ความมั่นใจปลอม
+    import subprocess as _sp
+    import types as _types
+
+    _orig_run = _sp.run
+    try:
+        _sp.run = lambda *a, **k: _types.SimpleNamespace(
+            stdout=None, stderr=None, returncode=0)
+        _t = core.page_text(Path("x.pdf"), 1)
+        _n = core.n_pages(Path("x.pdf"))
+    finally:
+        _sp.run = _orig_run
+    check("page_text คืน str แม้ subprocess ให้ stdout=None", isinstance(_t, str), True)
+    check("n_pages คืน int แม้ subprocess ให้ stdout=None", isinstance(_n, int), True)
+
+    # ต้องระบุ encoding="utf-8" ตอนอ่านผลจากโปรแกรมภายนอกเสมอ ห้ามพึ่ง locale
+    #
+    # บั๊กจริงบน Windows ภาษาไทย: pdftotext ส่งออกมาเป็น UTF-8 แต่ subprocess
+    # ที่ไม่ระบุ encoding จะ decode ด้วย locale ของเครื่อง (cp874) ผลคือ
+    #     "บริษัท สิริซอฟต์ จำกัด"  ->  "เธ?เธฃเธดเธฉเธ—เธฑ เธชเธดเธฃเธด..."
+    # ข้อความเพี้ยนหมด page_kind หาหัวเรื่องงบไม่เจอ สกัดได้ 0 แถว
+    #
+    # ร้ายที่สุดคือ mojibake ของ cp874 ให้ "พยัญชนะไทย" ออกมามากกว่าข้อความจริง
+    # (1,263 ตัว เทียบกับของจริง 527 ตัว) ตัวตรวจว่าเป็น PDF สแกนจึงบอกว่า
+    # "ไฟล์นี้มี text layer ปกติ" ทั้งที่อ่านออกมาเป็นขยะทั้งหน้า
+    #
+    # จำลองด้วยการให้ subprocess ปลอม decode ตาม encoding ที่ถูกส่งเข้ามาจริง
+    # ถ้าไม่ส่ง encoding มาก็ตกไปใช้ cp874 เหมือนเครื่อง Windows
+    _thai = "ลูกหนี้การค้าและลูกหนี้หมุนเวียนอื่น"
+
+    def _fake_run(cmd, capture_output=None, text=None, encoding=None, errors=None):
+        enc = encoding or "cp874"
+        return _types.SimpleNamespace(
+            stdout=_thai.encode("utf-8").decode(enc, errors="replace"),
+            stderr="", returncode=0)
+
+    _orig_run = _sp.run
+    try:
+        _sp.run = _fake_run
+        _got = core._run_text(["pdftotext"])
+    finally:
+        _sp.run = _orig_run
+    check("อ่านผลโปรแกรมภายนอกเป็น utf-8 ไม่ตาม locale ของเครื่อง", _got, _thai)
+
+    # เทสต์ข้างบนจับได้แค่ _run_text ตัวเดียว แต่บั๊กนี้อยู่ทุกที่ที่เรียก
+    # subprocess แล้วอ่านข้อความกลับมา ต้องจับทั้งคลาสของบั๊ก ไม่ใช่จุดเดียว
+    # (บทเรียนจากข้อ 27.2 — เทสต์ที่จับได้แค่วิธีเขียนแบบหนึ่ง กันบั๊กเดิม
+    #  กลับมาในรูปแบบใหม่ไม่ได้)
+    from pathlib import Path as _P
+
+    def _calls(src, needle="subprocess.run("):
+        """ตัดข้อความของการเรียกฟังก์ชันออกมาโดยนับวงเล็บให้สมดุล
+
+        ใช้ regex ไม่ได้ เพราะการเรียกจริงคร่อมหลายบรรทัดและมีวงเล็บซ้อน
+        (รอบแรกเขียนด้วย regex แล้วจับ ocr_reader.py ไม่เจอทั้งสองจุด
+         = เทสต์ที่บอกว่าผ่านทั้งที่บั๊กยังอยู่)
+        """
+        out, i = [], src.find(needle)
+        while i != -1:
+            j, depth = i + len(needle) - 1, 0
+            while j < len(src):
+                if src[j] == "(":
+                    depth += 1
+                elif src[j] == ")":
+                    depth -= 1
+                    if depth == 0:
+                        break
+                j += 1
+            out.append((i, src[i:j + 1]))
+            i = src.find(needle, j + 1)
+        return out
+
+    _here = _P(__file__).resolve().parent
+    _bad_enc = []
+    for _f in sorted(_here.glob("*.py")):
+        if _f.name == "selfcheck.py":
+            continue
+        _src = _f.read_text(encoding="utf-8")
+        for _pos, _call in _calls(_src):
+            if "text=True" in _call and "encoding=" not in _call:
+                _bad_enc.append(f"{_f.name}:{_src[:_pos].count(chr(10)) + 1}")
+    check("ไม่มี subprocess.run(text=True) ที่ไม่ระบุ encoding", _bad_enc, [])
+
+    # คอลัมน์เดียวต้องมีชนิดข้อมูลเดียว
+    #
+    # บั๊กจริง: extract_fs ใส่ page เป็น int ปกติ แต่แถวงบส่วนของเจ้าของที่ถูก
+    # รวมจากสองหน้าจะกลายเป็น str "5,6" ผลคือคอลัมน์เดียวมีทั้ง int และ str
+    # pyarrow แปลงไม่ได้ Streamlit โยน ArrowTypeError ขึ้น log ทุกครั้งที่แสดงตาราง
+    #
+    # ที่สำคัญกว่าคือมันเป็นสัญญาณว่า "หน้า" มีสองความหมายปนกันในคอลัมน์เดียว
+    # ซึ่งเป็นเรื่องที่ผู้ใช้ข้อมูลปลายทางต้องมาเดาเอง
+    # ต้องมีทั้งแถวที่ถูกรวมและแถวที่ไม่ถูกรวมอยู่ในชุดเดียวกัน
+    # ถ้าทดสอบแต่แถวที่ถูกรวม เทสต์จะผ่านทั้งที่บั๊กยังอยู่ (เขียนผิดมาแล้วรอบหนึ่ง)
+    import extract_fs as ef
+
+    def _row(concept, page, val):
+        return {"concept": concept, "item_used": "ก", "page": page,
+                "section": "", **{c: val for c in core.COLS}}
+
+    _merged = ef.merge_equity_rows([
+        _row("X", 5, None), _row("X", 6, 1.0),      # สองแถวนี้จะถูกรวม -> "5,6"
+        _row("Y", 7, 2.0),                          # แถวนี้ไม่ถูกรวม -> ยังเป็น int
+    ])
+    check("page ในชุดเดียวกันต้องเป็นชนิดเดียว",
+          sorted({type(r["page"]).__name__ for r in _merged}), ["str"])
+
     check("digits ตัดคอมม่าและอักษร",
           core.digits("หุ้นสามัญ 707,500,000 หุ้น มูลค่าหุ้นละ 1 บาท"), "7075000001")
     check("digits แยกทุนจดทะเบียนกับทุนที่ออก",
@@ -157,6 +305,29 @@ def test_no_duplicate_row_selection_logic():
             if pat.search(ln) and not ln.strip().startswith("#"):
                 offenders.append(f"{f.name}:{i}")
     check("ไม่มีการเลือกแถวชนะนอก fs_core", offenders, [])
+
+    # ช่องโหว่ของเทสต์ข้างบน: มันจับแค่ drop_duplicates
+    # แต่ตารางค้นหาสำหรับสมการสร้างด้วย for-loop ธรรมดาก็ได้ ซึ่งไม่มี
+    # ตรรกะเลือกแถวเลย กลายเป็น "ตัวสุดท้ายที่เจอชนะ"
+    #
+    # เจอจริงใน evaluate.py — สร้าง lookup[(company, concept, col)] เอง
+    # ผลคือรายงานสมการไม่ผ่าน 26 ข้อ ขณะที่ crosscheck.py บอกผ่านหมด
+    # ทั้งสองตัวรันสมการชุดเดียวกันบนไฟล์เดียวกัน (ข้าม 149 เท่ากันเป๊ะ)
+    # ต่างกันแค่วิธีสร้างตารางค้นหา
+    # ยกเว้นได้ด้วยการเขียน "# lut-ok:" พร้อมเหตุผลไว้ท้ายบรรทัด
+    # กรณีที่ยกเว้นได้จริงคือตารางที่สร้างจาก ground truth ไม่ใช่จากผลสกัด
+    # เพราะ ground truth มีแถวเดียวต่อ concept ต่อบริษัทอยู่แล้วโดยนิยาม
+    # จึงไม่มีอะไรให้ "เลือกว่าแถวไหนชนะ"
+    pat2 = re.compile(r'\[\s*\(\s*r\.company\s*,\s*r\.concept')
+    offenders2 = []
+    for f in sorted(here.glob("*.py")):
+        if f.name in ("fs_core.py", "selfcheck.py"):
+            continue
+        for i, ln in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+            if (pat2.search(ln) and not ln.strip().startswith("#")
+                    and "lut-ok:" not in ln):
+                offenders2.append(f"{f.name}:{i}")
+    check("ไม่มีการสร้างตารางค้นหาสมการเองนอก fs_core", offenders2, [])
 
 
 def test_row_selection_consumers_agree():

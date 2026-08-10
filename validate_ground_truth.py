@@ -92,7 +92,10 @@ def main():
             for c in COLS:
                 v = getattr(r, c)
                 if pd.notna(v):
-                    lookup[(r.company, r.concept, c)] = float(v)
+                    # lut-ok: สร้างจาก ground truth ไม่ใช่ผลสกัด
+                    # เฉลยมีแถวเดียวต่อ concept ต่อบริษัทอยู่แล้วโดยนิยาม
+                    # (ข้อ 1 ของไฟล์นี้ตรวจข้อนั้นอยู่) จึงไม่มีอะไรให้เลือก
+                    lookup[(r.company, r.concept, c)] = float(v)  # lut-ok:
 
     ok, bad, skip, _ = core.check_equations(
         lookup, list(eq.company.unique()), EQUATIONS)

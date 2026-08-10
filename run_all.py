@@ -32,6 +32,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import fs_core as core
+
 HERE = Path(__file__).resolve().parent
 
 # (ไฟล์เฉลย, งบที่ต้องเทียบด้วย)
@@ -53,8 +55,12 @@ GT_PAIRS = [
 
 
 def run(script, extra=(), quiet=True):
+    # encoding="utf-8" จำเป็น เพราะสคริปต์ลูกพิมพ์ภาษาไทยออกมา
+    # ถ้าปล่อยให้ decode ตาม locale บน Windows จะได้ข้อความเพี้ยน
+    # แล้ว regex ที่ใช้ดึงตัวเลขสรุปผลจะจับไม่ได้ กลายเป็นรายงานว่า 0 แถว
     r = subprocess.run([sys.executable, str(HERE / script), *extra],
-                       capture_output=quiet, text=True)
+                       capture_output=quiet, text=True,
+                       encoding="utf-8", errors="replace")
     return r.returncode, (r.stdout or "")
 
 
@@ -78,6 +84,15 @@ def main():
     problems = []
 
     # ------------------------------------------------------------------ 1
+    # ตรวจโปรแกรมภายนอกก่อนขั้นแรกเสมอ ถ้าขาดแล้วปล่อยให้รันต่อ ทุกขั้นจะพัง
+    # ด้วยข้อความคนละแบบ ทำให้ไล่หาสาเหตุจริงยาก
+    miss = core.missing_poppler()
+    if miss:
+        print(f"!! เครื่องนี้ไม่มี: {', '.join(miss)}")
+        print(f"   ระบบใช้โปรแกรมพวกนี้อ่าน PDF ทั้งหมด จะรันต่อไม่ได้")
+        print(f"   วิธีติดตั้ง — {core.poppler_howto()}")
+        return 1
+
     head("1. selfcheck — unit test และ alias map")
     rc, out = run("selfcheck.py", alias, quiet)
     m = re.search(r"ผ่าน (\d+) \| ไม่ผ่าน (\d+)", out)

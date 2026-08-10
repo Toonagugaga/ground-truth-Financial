@@ -179,6 +179,10 @@ def check_equations(lookup, companies, equations=None, tol=1.0, verbose=True):
     equations = EQUATIONS if equations is None else equations
     ok = bad = skip = 0
     fails = []
+    # ต้องล้างชื่อบริษัทแบบเดียวกับ pick_rows ไม่งั้นคีย์ไม่ตรงกันสักตัว
+    # แล้วจะได้ "ผ่าน 0 | ผิด 0 | ข้าม ทั้งหมด" ซึ่งหน้าตาเหมือนไม่มีปัญหา
+    # ทั้งที่แปลว่าตัวตรวจบอดสนิท (เจอกับไฟล์ที่ชื่อบริษัทมีช่องว่างติดมา)
+    companies = [str(c).strip() for c in companies]
     for comp in companies:
         for col in COLS:
             for eq in equations:
@@ -404,6 +408,39 @@ def label_candidates(label: str, prefixes=None, section=None) -> list[str]:
 # การอ่าน PDF
 # --------------------------------------------------------------------------
 
+# โปรแกรมภายนอกที่ทั้งระบบพึ่งอยู่ ถ้าไม่มีจะอ่าน PDF ไม่ได้เลยสักไฟล์
+POPPLER_BINS = ("pdftotext", "pdfinfo")
+
+POPPLER_HOWTO = {
+    "windows": "ดาวน์โหลด poppler จาก github.com/oschwartz10612/poppler-windows "
+               "แตกไฟล์แล้วเพิ่มโฟลเดอร์ bin เข้า PATH",
+    "darwin": "brew install poppler",
+    "linux": "sudo apt install poppler-utils",
+}
+
+
+def missing_poppler() -> list[str]:
+    """คืนรายชื่อโปรแกรมของ poppler ที่หาไม่เจอในเครื่องนี้
+
+    ต้องตรวจก่อนเรียกใช้เสมอ ไม่ใช่รอให้ subprocess โยน error ออกมา
+
+    บั๊กจริง: บน Windows ที่ไม่ได้ติดตั้ง poppler subprocess โยน
+    FileNotFoundError [WinError 2] ซึ่งผู้เรียกดักไว้แล้วสรุปว่า
+    "อ่านไม่ได้ อาจเป็น PDF สแกน" ทั้งที่ไฟล์นั้นมี text layer ปกติ
+    ผลคือชี้ให้ผู้ใช้ไปแก้ผิดจุด — ระบบวินิจฉัยสาเหตุผิด อันตรายกว่าไม่วินิจฉัย
+    """
+    import shutil
+    return [b for b in POPPLER_BINS if shutil.which(b) is None]
+
+
+def poppler_howto() -> str:
+    """คำสั่งติดตั้ง poppler ให้ตรงกับระบบปฏิบัติการที่กำลังรันอยู่"""
+    import sys
+    key = ("windows" if sys.platform.startswith("win")
+           else "darwin" if sys.platform == "darwin" else "linux")
+    return POPPLER_HOWTO[key]
+
+
 def page_text(pdf: Path, page: int) -> str:
     """อ่านข้อความหน้าเดียว
 
@@ -412,15 +449,38 @@ def page_text(pdf: Path, page: int) -> str:
     โดยไม่มี error  ทดสอบแล้ว pdfplumber 3/15 vs pdftotext 15/15
     และห้ามถอด -layout ออก เพราะจะเสียการเรียงคอลัมน์
     """
-    return subprocess.run(
-        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
-        capture_output=True, text=True,
-    ).stdout
+    return _run_text(
+        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"])
+
+
+def _run_text(cmd) -> str:
+    """เรียกโปรแกรมภายนอกแล้วคืนข้อความเสมอ ไม่มีทางคืน None
+
+    บั๊กจริงบน Windows: subprocess.run(...).stdout คืน None ทำให้
+    "".join(...) ที่ผู้เรียกเขียนไว้ระเบิดเป็น TypeError กลางหน้าจอผู้ใช้
+    แทนที่ระบบจะบอกว่า "อ่านไฟล์นี้ไม่ได้" ซึ่งเป็นสิ่งที่ควรบอก
+
+    ฟังก์ชันที่สัญญาว่าคืน str ต้องคืน str เสมอ ไม่ว่าข้างล่างจะทำอะไร
+    ไม่งั้นผู้เรียกทุกรายต้องเขียนโค้ดกันพังเอง ซึ่งจะลืมสักที่จนได้
+    """
+    try:
+        # ต้องระบุ encoding="utf-8" เสมอ ห้ามพึ่ง locale ของเครื่อง
+        #
+        # poppler ส่งข้อความออกมาเป็น UTF-8 เสมอ แต่ subprocess ที่ไม่ระบุ
+        # encoding จะ decode ตาม locale ซึ่งบน Windows ภาษาไทยคือ cp874
+        # ผลคือข้อความเพี้ยนทั้งไฟล์ หาหัวเรื่องงบไม่เจอ สกัดได้ 0 แถว
+        # และ mojibake ของ cp874 ยังให้ "พยัญชนะไทย" มากกว่าข้อความจริงเสียอีก
+        # ทำให้ตัวตรวจ PDF สแกนสรุปว่า "ไฟล์นี้มี text layer ปกติ"
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
+    except (OSError, ValueError):
+        # หาโปรแกรมไม่เจอ หรือเรียกไม่ได้ — ผู้เรียกควรตรวจ missing_poppler() ก่อน
+        return ""
+    return r.stdout if isinstance(r.stdout, str) else ""
 
 
 def n_pages(pdf: Path) -> int:
-    out = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True).stdout
-    m = re.search(r"Pages:\s+(\d+)", out)
+    m = re.search(r"Pages:\s+(\d+)", _run_text(["pdfinfo", str(pdf)]))
     return int(m.group(1)) if m else 0
 
 

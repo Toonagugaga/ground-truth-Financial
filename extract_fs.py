@@ -286,7 +286,11 @@ def extract_pdf(pdf: Path, company: str, matcher, max_pages=MAX_PAGES, debug=Fal
                 "source": pdf.name,
                 "statement": kind,
                 "unit": unit,
-                "page": p,
+                # เก็บเป็น str เสมอ เพราะแถวงบส่วนของเจ้าของที่รวมจากสองหน้า
+                # จะกลายเป็น "5,6" ถ้าปล่อยให้แถวปกติเป็น int คอลัมน์เดียวจะมี
+                # สองชนิด -> pyarrow แปลงไม่ได้ Streamlit โยน ArrowTypeError
+                # และผู้ใช้ข้อมูลปลายทางต้องมาเดาเองว่าช่องไหนเป็นชนิดอะไร
+                "page": str(p),
                 "section": section or "",
                 "item_raw": label,
                 "item_used": used_label,
@@ -572,7 +576,7 @@ def build_equity_rows(pdf, company, matcher, page, text, is_consolidated, seq):
         vals = [v, pv, None, None] if is_consolidated else [None, None, v, pv]
         rows.append({
             "company": company, "source": pdf.name, "statement": "SE",
-            "unit": core.detect_unit(text), "page": page,
+            "unit": core.detect_unit(text), "page": str(page),
             "section": "งบรวม" if is_consolidated else "งบเฉพาะกิจการ",
             "item_raw": label, "item_used": used,
             "concept": concept, "concept_eq": concept,
@@ -641,6 +645,12 @@ def merge_equity_rows(rows):
                 keep[c] = r[c]
         keep["page"] = f'{keep["page"]},{r["page"]}'
         keep["section"] = "งบรวม+งบเฉพาะกิจการ"
+
+    # บังคับให้ทั้งชุดเป็น str ตรงนี้ด้วย ไม่ใช่หวังว่าผู้เรียกจะใส่มาถูกชนิด
+    # แถวที่ถูกรวมกลายเป็น "5,6" ส่วนแถวที่ไม่ถูกรวมยังเป็น int
+    # ปล่อยไว้คอลัมน์เดียวจะมีสองชนิด ซึ่งพังตอนแสดงผลและทำให้ปลายทางต้องเดาเอง
+    for r in out:
+        r["page"] = str(r["page"])
     return out
 
 

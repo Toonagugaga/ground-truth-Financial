@@ -59,10 +59,13 @@ def is_balance_row(label: str) -> bool:
 
 
 def page_text(pdf: Path, page: int) -> str:
-    r = subprocess.run(
-        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
-        capture_output=True, text=True)
-    return r.stdout
+    """เรียก core ตัวเดียว ห้ามเขียนการอ่าน PDF ซ้ำที่นี่
+
+    ของเดิมก๊อป subprocess.run มาไว้เอง แล้วไม่ได้ระบุ encoding="utf-8"
+    ผลคือบน Windows ภาษาไทยไฟล์นี้อ่านข้อความเพี้ยนทั้งหมด ขณะที่ extract_fs
+    ซึ่งใช้ core.page_text อ่านได้ปกติ — โค้ดสองที่ทำงานเดียวกันแต่เดินห่างกัน
+    """
+    return core.page_text(pdf, page)
 
 
 def row_values(ln: str, cols: list[int]) -> tuple[str, list, int, int]:

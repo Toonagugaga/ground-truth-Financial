@@ -287,7 +287,8 @@ def compare(pdf: Path, first: int, last: int, lang: str, psm: int):
     ocr_pages = ocr_pdf(pdf, first, last, lang, psm)
     raw = subprocess.run(["pdftotext", "-layout", "-f", str(first),
                           "-l", str(last), str(pdf), "-"],
-                         capture_output=True, text=True).stdout
+                         capture_output=True, text=True,
+                         encoding="utf-8", errors="replace").stdout
     real_pages = raw.split("\f")
 
     NUM = re.compile(r"\(?-?\d{1,3}(?:,\d{3})+\)?")
@@ -344,7 +345,8 @@ def main():
         print(pages[0][:4000])
         real = subprocess.run(["pdftotext", "-layout", "-f", str(args.dump),
                                "-l", str(args.dump), str(src), "-"],
-                              capture_output=True, text=True).stdout
+                              capture_output=True, text=True,
+                              encoding="utf-8", errors="replace").stdout
         if real.strip():
             print()
             print("=" * 100)
